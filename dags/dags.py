@@ -40,4 +40,11 @@ save_gold = BashOperator(
     dag=dag
 )
 
+test = BashOperator(
+    task_id='test_sqlite',
+    bash_command = 'python /var/tmp/app/demosql.py',
+    dag=dag
+)
+
 crawl_gold >> transform_gold >> save_gold
+crawl_gold >> transform_gold >> test
